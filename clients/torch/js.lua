@@ -220,6 +220,15 @@ local function format(data, chart)
                   val.y = value
                   values[i] = val
                end
+            elseif values[1].nb and values[1].val then
+               dataset.values = {}
+               -- gnuplot.hist histogram
+               for i,bin in ipairs(values) do
+                  local val = {}
+                  val.x = bin.val
+                  val.y = bin.nb
+                  table.insert(dataset.values, val)
+               end
             elseif not values[1].x or not values[1].y then
                for i,value in ipairs(values) do
                   value.x = value[1]
